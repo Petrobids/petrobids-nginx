@@ -72,8 +72,8 @@ else if [ "$1" = "post-deploy" ]; then
 	#/usr/bin/sudo ln -f -s $DIR/ssl/petrobids.crt $SSL_DIR/petrobids.crt
 	#/usr/bin/sudo ln -f -s $DIR/ssl/petrobidsPK.key $SSL_DIR/petrobidsPK.key
 	echo "=================== prepare config"
-	#/usr/bin/sudo sed s/\${domain}/$DOMAIN/ $DIR/petrobids-app-conf.conf | /usr/bin/sudo sed s/\${subdir}/$CURRENT_DIR/ > $NGINX_DIR/sites-available/petrobids-app
-	#/usr/bin/sudo ln -f -s $NGINX_DIR/sites-available/petrobids-app $NGINX_DIR/sites-enabled/petrobids-app
+	/usr/bin/sudo sed s/\${domain}/$DOMAIN/ $DIR/petrobids-app-conf.conf | /usr/bin/sudo sed s/\${subdir}/$CURRENT_DIR/ > $NGINX_DIR/sites-available/petrobids-app
+	/usr/bin/sudo ln -f -s $NGINX_DIR/sites-available/petrobids-app $NGINX_DIR/sites-enabled/petrobids-app
 	echo "=================== restart nginx"
 	/usr/bin/sudo service nginx status || /usr/bin/sudo service nginx start
     /usr/bin/sudo service nginx reload
