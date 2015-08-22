@@ -3,7 +3,7 @@
 cd "$(/usr/bin/dirname "$0")"
 
 PATH='/var/www'
-REPO='nginx-config'
+REPO='petrobids-nginx'
 DIR="$(pwd)"
 CURRENT_DIR="current\/"
 NGINX_DIR='/etc/nginx'
@@ -61,14 +61,14 @@ if [ "$1" = "bootstrap" ]; then
 	$DIR/manage.sh deploy $2
 else if [ "$1" = "deploy" ]; then
 	echo "=================== clone repo"
-	run_remote "test -d $PATH/$REPO || git clone git@bitbucket.org:satrails/$REPO.git $PATH/$REPO"
+	run_remote "test -d $PATH/$REPO || git clone git@github.com:Petrobids/$REPO.git $PATH/$REPO"
 	echo "=================== update repo"
 	run_remote "cd $PATH/$REPO && git fetch && git checkout $BRANCH && git merge origin/$BRANCH"
 	echo "=================== install"
 	run_remote "sudo $PATH/$REPO/manage.sh post-deploy $2"
 else if [ "$1" = "post-deploy" ]; then
 	echo "=================== add SSL certificates"
-	#/usr/bin/sudo cat $DIR/ssl/satrailsCA.crt >> $DIR/ssl/petrobids.crt
+	#/usr/bin/sudo cat $DIR/ssl/petrobidsCA.crt >> $DIR/ssl/petrobids.crt
 	#/usr/bin/sudo ln -f -s $DIR/ssl/petrobids.crt $SSL_DIR/petrobids.crt
 	#/usr/bin/sudo ln -f -s $DIR/ssl/petrobidsPK.key $SSL_DIR/petrobidsPK.key
 	echo "=================== prepare config"
